@@ -1,0 +1,17 @@
+# Your workflow name.
+name: Deploy to Render
+
+# Run workflow on every push to main branch.
+on:
+  push:
+    branches: [main]
+
+# Your workflows jobs.
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Trigger Render's automatic Docker build process via Webhook
+      - name: Trigger Render Deploy Hook
+        run: |
+          curl -f "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
